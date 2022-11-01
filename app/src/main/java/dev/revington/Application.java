@@ -35,14 +35,7 @@ public class Application implements CommandLineRunner {
     private JMail mailService;
 
     @Override
-    public void run(String... args) throws Exception {
-        /*
-        userRepository.deleteAll();
-        notificationRepository.deleteAll();
-        friendRepository.deleteAll();
-        tokenRepository.deleteAll();
-        */
-        
+    public void run(String... args) throws Exception {  
         userRepository.findAll().forEach((user) -> {
             user.setActivity(Parameter.OFFLINE);
             user.setSocketId("");

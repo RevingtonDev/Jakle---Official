@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dev.revington.util;
 
 import dev.revington.controller.Credential;
@@ -40,8 +36,7 @@ public class Security {
         try (InputStream mailStream = Security.class.getResourceAsStream(token.getGrants() == Parameter.GRANT_REACTIVATION ? "/mail/reactivation.mail" : "/mail/activation.mail")) {
             if (mailStream == null) {
                 throw new FileNotFoundException();
-            }
-            logger.log(Level.SEVERE, mailStream == null ? "null" : " askdla");
+            } 
             String content = String.format(new String(mailStream.readAllBytes()), name, url + (token.getGrants() == Parameter.GRANT_REACTIVATION ? "/reactivate" : "/activate"), Base64.getEncoder().encodeToString(token.getToken().getBytes()));
             return mailService.sendMail(user.getEmail(), (token.getGrants() == Parameter.GRANT_REACTIVATION ? "Account Reactivation" : "Account Verification"), content);
         } catch (Exception e) {

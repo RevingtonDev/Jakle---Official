@@ -61,7 +61,7 @@ public class JMail {
                 .setAccessType("offline")
                 .build();
         LocalServerReceiver receiver = new LocalServerReceiver.Builder()
-                .setPort(8888)
+                .setPort(9000)
                 .build();
 
         return new AuthorizationCodeInstalledApp(codeFlow, receiver).authorize("user");
@@ -95,9 +95,6 @@ public class JMail {
         
         try {
             Message output = service.users().messages().send("me", message).execute();
-            logger.log(Level.INFO, output.toPrettyString());
-            logger.log(Level.INFO, message.getRaw());
-            logger.log(Level.INFO, to);
             return true;
         } catch (GoogleJsonResponseException e) {
             Logger.getLogger(JMail.class.getName()).log(Level.SEVERE, null, e);
