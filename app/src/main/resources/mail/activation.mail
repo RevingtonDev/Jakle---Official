@@ -1,0 +1,41 @@
+<html>
+<head>
+<style>
+    .flex {
+        display: flex;
+    }
+
+    .row {
+        width: 100%%;
+    }
+
+    .btn {
+        background-color: #0f000f;
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        outline: none;
+        font-family: "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+</style>
+</head>
+<body>
+<div style="padding: 20px; border-radius: 20px; border: 6px solid #333;">
+<h2>Greetings %s!</h2>
+<p>
+<h3>
+&emsp;Welcome to <span style="background-color: #0f0016; color: white; font-weight: 400; padding: 5px;">Jakle</span>. We hope you have a great experience. Please click the following button within 6 hours to verify your account. If you didn't create an account in Jakle please ignore this message.
+</h3>
+</p>
+
+<form action="%s" method="post" class="flex row" enctype="application/x-www-form-urlencoded">
+    <input style="display: none;" name="token" type="text" value="%s">
+    <input style="margin: auto;" class="btn" type="submit" value="Verify">
+</form>
+</div>
+</body>
+</html>
+
+

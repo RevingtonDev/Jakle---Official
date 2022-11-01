@@ -1,0 +1,41 @@
+<html>
+<head>
+<style>
+    .flex {
+        display: flex;
+    }
+
+    .row {
+        width: 100%%;
+    }
+
+    .btn {
+        background-color: #0f000f;
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        outline: none;
+        font-family: "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+</style>
+</head>
+<body>
+<div style="padding: 20px; border-radius: 20px; border: 6px solid #333;">
+<h2>Greetings %s!</h2>
+<p>
+<h3>
+&emsp;We noticed too many incorrect login attempts to your account and we disabled your account. Please click the below button to reactivate your existing account. This message is only valid for 6 hours.
+</h3>
+</p>
+
+<form action="%s" method="post" class="flex row" enctype="application/x-www-form-urlencoded">
+    <input style="display: none;" name="token" type="text" value="%s">
+    <input style="margin: auto;" class="btn" type="submit" value="Reactivate">
+</form>
+</div>
+</body>
+</html>
+
+

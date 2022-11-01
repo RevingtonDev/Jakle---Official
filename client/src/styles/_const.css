@@ -1,0 +1,16 @@
+:root {
+  --main-color: #0f0016;
+  --def-color: #0f000f;
+  --dark: #131313;
+  --light-blue: rgb(22, 160, 240);
+  --blue: rgb(45, 41, 240);
+  --shiney-grey: #e0e0e0;
+  --light: #cafaff;
+  --red: #aa0c2c;
+  --yel: rgb(176, 127, 231);
+  --g: rgb(7, 194, 1);
+  --fd: rgb(0, 57, 75);
+  --fd-f: rgb(0, 33, 143);
+  --yt: rgb(240, 213, 255);
+  --sky-blue: rgba(135, 206, 235, 0.5);
+}

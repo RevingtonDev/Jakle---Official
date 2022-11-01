@@ -1,0 +1,209 @@
+plugins {
+    id 'org.springframework.boot' version '3.0.0-M5'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+    id 'org.asciidoctor.convert' version '1.5.8'
+    id 'java'
+}
+
+group = 'dev.revington'
+sourceCompatibility = '17'
+
+repositories {
+  mavenCentral()
+  maven { url 'https://repo.spring.io/milestone' }
+  maven { url 'https://repo.spring.io/snapshot' }
+}
+
+ext {
+  set('snippetsDir', file("build/generated-snippets"))
+}
+
+dependencies {  
+    implementation 'com.google.guava:guava:31.0.1-jre'
+    // implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    // implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // implementation 'org.springframework.boot:spring-boot-starter-data-ldap'
+    // implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    // implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server' 
+    // implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    // implementation 'org.springframework.security:spring-security-rsocket'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    // implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-rsocket'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.security:spring-security-messaging'
+    implementation 'org.springframework.session:spring-session-core' 
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'javax.mail:javax.mail-api:1.5.5'
+    implementation 'com.sun.mail:javax.mail:1.6.2'
+    implementation 'com.google.api-client:google-api-client:2.0.0' 
+    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.34.1'
+    implementation 'com.google.apis:google-api-services-gmail:v1-rev20220404-2.0.0'
+    // runtimeOnly 'mysql:mysql-connector-java'
+    // runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc' 
+    testImplementation 'org.springframework.security:spring-security-test'
+}
+
+testing {
+    suites { 
+        test { 
+            useJUnit('4.13.2')
+        }
+    }
+}   
+
+def props = new Properties();
+
+final def nodeDir = "node.dir"
+final def currentDir = file("./").getAbsolutePath().replace("\\", "/")
+
+def buildProperties = file("./build.properties")
+if (!buildProperties.exists())
+    buildProperties.createNewFile();
+
+buildProperties.withInputStream {props.load(it)}
+
+def nodeNotFound = "npm executable could not found. Either install node.js or define node.js install path in build.properties file as node.dir."
+
+// Registering new tasks
+tasks.register("findNodeJS")
+tasks.register("buildClient")
+tasks.register("buildRelease")
+tasks.register("run")
+
+findNodeJS {
+    group 'other'
+    description "Find nodejs package manager executable."
+
+    doLast {
+        def os = System.getProperty("os.name").toLowerCase();
+        println(os);
+        def command = ""
+        if (os.contains("windows")) {
+            command += "where"
+        } else if (os.contains("linux")) {
+            command += "which"
+        } else
+            throw new Exception(nodeNotFound)
+
+        command += " npm"
+
+        def proc = command.execute()
+        List<String> output = new ArrayList<>(), error = new ArrayList<>();
+
+        proc.inputStream.readLines().forEach(output::add)
+
+        if (proc.exitValue() != 0)
+            throw new Exception(nodeNotFound)
+        else {
+            props.setProperty(nodeDir, output.get(output.size() - 1).replace("\\", "/"))
+            props.forEach((key, val) -> { buildProperties.write(key + "=" + val + "\n") })
+
+            println "npm found at " + props.getProperty(nodeDir)
+        }
+    }
+}
+
+buildClient {
+    group 'build'
+    description 'Build react application.'
+
+    if (props.getProperty(nodeDir) == null) dependsOn 'findNodeJS'
+
+    dependsOn 'clean'
+
+    def client = file(currentDir + "/../client")
+    def staticDir = "$currentDir/src/main/resources/static"
+
+    doFirst {
+        if (!client.exists())
+            throw new Exception("No react application found.")
+
+        def command = props.getProperty(nodeDir) + " run build "
+        if (client.getAbsolutePath().contains(" ")) {
+            command += "--prefix=\"" + client.getAbsolutePath().replace('\\', '/') + "\""
+        } else
+            command += "--prefix=" + client.getAbsolutePath().replace('\\', '/')
+        println "Executing " + command
+        def proc = command.execute()
+        proc.waitForProcessOutput(System.out, System.err)
+        if(proc.exitValue() != 0)
+            throw new Exception("React application build failed.")
+
+        copy {
+            from client.getAbsolutePath() + "/build"
+            exclude 'index.html'
+            if (!file(staticDir).exists()) {
+                file(staticDir).mkdir()
+            }
+            into staticDir
+        }
+
+        copy {
+            from client.getAbsolutePath() + '/build/index.html'
+            into staticDir + "/../templates/"
+        }
+    }
+
+    doLast {
+        file(client.getAbsolutePath() + "/build").deleteDir()
+
+        def cssFiles = file(staticDir + "/static/css").listFiles()
+        def css = null;
+        for (def i = 0; i < cssFiles.length; i++) {
+            if (cssFiles[i].getName().endsWithIgnoreCase(".css")) {
+                css = cssFiles[i];
+                break;
+            }
+        }
+
+        if (css == null)
+            throw new Exception("Can't find a css file to link.");
+
+        def appProps = new Properties()
+        def appPropsFile = file(staticDir + "/../application.properties")
+        appPropsFile.withInputStream {appProps.load(it) }
+
+        appProps.put("spring.react.css", css.getAbsolutePath().replace("\\", "/").replace(staticDir, ""))
+
+        appPropsFile.withOutputStream {
+            appProps.forEach((key, val) -> {
+                it.write((key + "=" + val + "\n").getBytes())
+            })
+        }
+    }
+}
+
+clean {
+    doLast {
+        def index = file("$currentDir/src/main/resources/templates/index.html")
+        if(index.exists()) index.delete();
+        def clientBuildDir = file("$currentDir/src/main/resources/static")
+        if (clientBuildDir.exists())
+            clientBuildDir.deleteDir()
+        clientBuildDir.mkdir()
+    }
+}
+
+buildRelease {
+    group "build"
+    description 'Assembles and build both client and server applications.'
+
+    dependsOn 'buildClient', 'bootJar'
+    mustRunAfter 'buildClient'
+}
+
+run {
+    group "application"
+    description "Builds the react application and then runs the project."
+
+    dependsOn 'buildClient', 'bootRun'
+    mustRunAfter 'buildClient'
+}

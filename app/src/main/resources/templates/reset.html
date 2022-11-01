@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Jakle - Reset Password</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="${css}" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="page-container window-fill center align-start">
+            <div class="container page-container center" style="padding: 20px">
+                <h3 class="center row">Reset Password</h3>
+                <form class="center column-flex" method="post" enctype="application/x-www-form-urlencoded">
+                    <div class="data-input">
+                        <input class="data-field row" required type="password" id="password-field" placeholder="Password" name="password" autocomplete="off" spellcheck="false"/>
+                        <span class="pwd-state flag center" style="margin: 0 5px;">
+                            <svg
+                                width="20"
+                                height="20"
+                                class="eye"
+                                fill="white"
+                                viewBox="0 0 16 16"
+                                >
+                            <path
+                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
+                                />
+                            <path
+                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
+                                />
+                            </svg>
+                            <svg
+                                width="20"
+                                height="20"
+                                fill="white"
+                                class="eye-slash hidden"
+                                viewBox="0 0 16 16"
+                                >
+                            <path
+                                d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"
+                                />
+                            <path
+                                d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"
+                                />
+                            <path
+                                d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"
+                                />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="data-input">
+                        <input class="data-field row" required title="Password should contain at least 8 characters." type="password" id="confirm-password" placeholder="Confirm Password" autocomplete="off" spellcheck="false"/>
+                        <span class="pwd-state flag center" style="margin: 0 5px;">
+                            <svg
+                                width="20"
+                                height="20"
+                                class="eye"
+                                fill="white"
+                                viewBox="0 0 16 16"
+                                >
+                            <path
+                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
+                                />
+                            <path
+                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
+                                />
+                            </svg>
+                            <svg
+                                width="20"
+                                height="20"
+                                fill="white"
+                                class="eye-slash hidden"
+                                viewBox="0 0 16 16"
+                                >
+                            <path
+                                d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"
+                                />
+                            <path
+                                d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"
+                                />
+                            <path
+                                d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"
+                                />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="error center capsule row" th:if="${error}" th:text="${des}">
+                    </div>
+                    <div class="form-end center flex-end">
+                      <button class="btn default-btn" style="align-self: center;">Reset Password</button>
+                    </div> 
+                </form>
+            </div>
+        </div>
+        <script>
+            const pField = [document.querySelector("#password-field"), document.querySelector("#confirm-password")],
+                    pState = document.querySelectorAll(".pwd-state"),
+                    EYE = document.querySelectorAll(".eye"),
+                    EYE_SLASH = document.querySelectorAll(".eye-slash"),
+                    form = document.querySelector(".data-form");
+
+            let show_password = [false, false];
+
+            for (let i = 0; i < 2; i++) {
+                pState[i].addEventListener("click", () => {
+                    if (show_password[i]) {
+                        pField[i].type = "password";
+                        EYE[i].classList.remove("hidden");
+                        EYE_SLASH[i].classList.add("hidden");
+                    } else {
+                        pField[i].type = "text";
+                        EYE_SLASH[i].classList.remove("hidden");
+                        EYE[i].classList.add("hidden");
+                    }
+                    show_password[i] = !show_password[i];
+                });
+            }
+
+            form.addEventListener("submit", e => {
+                e.preventDefault();
+
+                if (form.elements["password-field"].value != form.elements["confirm-password"].value) {
+                    form.elements["password-field"].classList.add("invalid");
+                    form.elements["confirm-password"].classList.add("invalid");
+                } else {
+                    form.elements["password-field"].classList.remove("invalid");
+                    form.elements["confirm-password"].classList.remove("invalid");
+                }
+
+                if (form.elements["email-field"].value != form.elements["confirm-email"].value) {
+                    form.elements["email-field"].classList.add("invalid");
+                    form.elements["confirm-email"].classList.add("invalid");
+                } else {
+                    form.elements["email-field"].classList.remove("invalid");
+                    form.elements["confirm-email"].classList.remove("invalid");
+                }
+                if (form.elements["email-field"].value == form.elements["confirm-email"].value && form.elements["password-field"].value == form.elements["confirm-password"].value) {
+                    form.submit();
+                }
+            });
+        </script>
+    </body> 
+</html>

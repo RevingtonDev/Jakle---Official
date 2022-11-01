@@ -1,0 +1,222 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html
+    lang="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    >
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Jakle - Login</title>
+        <link th:href="${css}" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="page-notification row center" style="padding: 8px" th:if="${message}" th:text="${action}"></div>
+        <div class="window-fill page-container center column-flex">
+            <form
+                action="/login"
+                class="data-form login container"
+                method="post"
+                enctype="application/x-www-form-urlencoded"
+                >
+                <div class="form-title">
+                    <div class="row center column-flex">
+                        <div class="title fit-c main">Jakle</div>
+                        <div class="underline-pop"></div>
+                    </div>
+                </div>
+                <h2 class="center" style="color: var(--shiney-grey);">Sign in</h2>
+                <h4 class="center" style="margin-bottom: 16px;">Welcome back!</h4>
+                <div class="data-input center capsule" tabindex="0">
+                    <span class="flag">
+                        <svg
+                            width="20"
+                            height="20"
+                            class="envelope"
+                            fill="white"
+                            viewBox="0 0 16 16"
+                            >
+                            <path
+                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"
+                                />
+                        </svg>
+                    </span>
+                    <input
+                        type="email"
+                        autocomplete="off"
+                        title="Please enter a valid email address."
+                        class="data-field row"
+                        spellcheck="false"
+                        name="email"
+                        placeholder="Email"
+                        required
+                        />
+                </div>
+                <div class="data-input center capsule" tabindex="1">
+                    <span class="flag">
+                        <svg
+                            width="20"
+                            height="20"
+                            fill="white"
+                            class="key"
+                            viewBox="0 0 16 16"
+                            >
+                            <path
+                                d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"
+                                />
+                            <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                        </svg>
+                    </span>
+                    <input
+                        type="password"
+                        class="data-field row"
+                        name="password"
+                        spellcheck="false"
+                        required
+                        placeholder="Password"
+                        id="password-field"
+                        />
+                    <span class="pwd-state flag center">
+                        <svg
+                            width="20"
+                            height="20"
+                            class="eye"
+                            fill="white"
+                            viewBox="0 0 16 16"
+                            >
+                            <path
+                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
+                                />
+                            <path
+                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
+                                />
+                        </svg>
+                        <svg
+                            width="20"
+                            height="20"
+                            fill="white"
+                            class="eye-slash hidden"
+                            viewBox="0 0 16 16"
+                            >
+                            <path
+                                d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"
+                                />
+                            <path
+                                d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"
+                                />
+                            <path
+                                d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"
+                                />
+                        </svg>
+                    </span>
+                </div>
+                <div class="error center capsule" th:if="${error}" th:text="${des}">
+
+                </div>
+                <div class="row center" th:if="${activate}">
+                    <a href="/activate" class="btn default-btn">Resend Link</a>
+                </div>
+                <div class="row data-check center row-flex">
+                    <input class="check-box" type="checkbox" name="remember" id="remember_me">
+                        <label for="remember_me" class="center row-flex check-label">
+                            <span class="check-field center"></span>
+                            Remember me
+                        </label>
+                </div>
+                <div class="space-bet center form-end">
+                    <button type="button" class="link" onclick="changeResetWindow(true)">Forgot password ?</button>
+                    <button class="default-btn btn capsule">Login</button>
+                </div>
+            </form>
+
+            <section class="window-fill center reset-form-container remove" style="z-index: 5000; position: absolute; background-color: var(--sky-blue); backdrop-filter: blur(8px);">
+                <form class="reset-form container page-container center column-flex align-start">
+                    <div class="row center space-bet">
+                        <div class="container-title">
+                            Reset Password
+                        </div>
+                        <button type="button" onclick="changeResetWindow(false)" class="btn" style="font-family: MaterialIcons; background-color: white; font-size: 1.3rem; padding: 5px; border-radius: 50%">close</button>
+                    </div>
+                    <div class="row data-input">
+                        <input type="email" name="email" spellcheck="off" class="data-field" placeholder="Email" required>
+                    </div>
+                    <span class="row center capsule"></span>
+                    <div class="space-bet center row form-end">
+                        <div></div>
+                        <button class="default-btn btn capsule">Reset</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+        <script>
+            const pField = document.querySelector("#password-field"),
+                    pState = document.querySelector(".pwd-state"),
+                    EYE = document.querySelector(".eye"),
+                    EYE_SLASH = document.querySelector(".eye-slash"),
+                    form = document.querySelector(".data-form"),
+                    resetFormContainer = document.querySelector(".reset-form-container"),
+                    resetForm = document.querySelector(".reset-form"),
+                    resetError = document.querySelector("span.row.capsule.center");
+
+            let show_password = false, show_reset_window = false, reset_output = undefined;
+
+            const changeResetWindow = () => {
+                if (show_reset_window) {
+                    resetFormContainer.classList.add("remove");
+                } else {
+                    resetFormContainer.classList.remove("remove");
+                }
+                show_reset_window = !show_reset_window;
+            };
+
+            pState.addEventListener("click", () => {
+                if (show_password) {
+                    pField.type = "password";
+                    EYE.classList.remove("hidden");
+                    EYE_SLASH.classList.add("hidden");
+                } else {
+                    pField.type = "text";
+                    EYE_SLASH.classList.remove("hidden");
+                    EYE.classList.add("hidden");
+                }
+                show_password = !show_password;
+            });
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                form.elements["remember"].value = form.elements["remember"].checked ? "true" : "false";
+                form.submit();
+            });
+
+            resetForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                resetError.innerHTML = "";
+                resetError.classList.remove("error");
+                reset_output = undefined;
+
+                fetch(`/api/v1/reset-link?email=${resetForm[1].value}`, {method: "post", credentials: "include"})
+                        .catch(e => {
+                            reset_output = "Something went wrong.";
+                        })
+                        .then(res => res.json())
+                        .then(res => {
+                            if (res) {
+                                if (res.code === 200) {
+                                    let parser = new DomParser();
+                                    document.appendChild(parser.parseFromString(`<div class="page-notification row center" style="padding: 8px">A password reset link successfully send.</div>`))
+                                    changeResetWindow(false);
+                                } else {
+                                    reset_output = res.query;
+                                }
+                            }
+                        })
+                        .finally(() => {
+                            if (reset_output) {
+                                resetError.innerHTML = reset_output;
+                                resetError.classList.add("error");
+                            }
+                        });
+            });
+        </script>
+    </body>
+</html>

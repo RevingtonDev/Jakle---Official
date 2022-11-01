@@ -1,0 +1,41 @@
+<html>
+<head>
+<style>
+    .flex {
+        display: flex;
+    }
+
+    .row {
+        width: 100%%;
+    }
+
+    .btn {
+        background-color: #0f000f;
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        outline: none;
+        font-family: "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+</style>
+</head>
+<body>
+<div style="padding: 20px; border-radius: 20px; border: 6px solid #333;">
+<h2>Greetings %s!</h2>
+<p>
+<h3>
+&emsp; Please click the following button to reset your password and if you didn't request to reset your password please ignore this message. For security reasons this message is only valid for 15 minutes and after that you'll have to request a new link. 
+</h3>
+</p>
+
+<form action="%s" method="get" class="flex row" enctype="application/x-www-form-urlencoded">
+    <input style="display: none;" name="token" type="text" value="%s">
+    <input style="margin: auto;" class="btn" type="submit" value="Reset Password">
+</form>
+</div>
+</body>
+</html>
+
+

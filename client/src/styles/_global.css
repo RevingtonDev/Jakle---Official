@@ -1,0 +1,136 @@
+@font-face {
+  font-family: altona;
+  src: url("../fonts/altona_sans/AltonaSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: barlow;
+  src: url("../fonts/Barlow/Barlow-Regular.ttf");
+}
+
+@font-face {
+  font-family: cabin;
+  src: url("../fonts/Cabin/Cabin-VariableFont_wdth\,wght.ttf");
+}
+
+@font-face {
+  font-family: catamaran;
+  src: url("../fonts/Catamaran/Catamaran-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: fredoka;
+  src: url("../fonts/Fredoka/Fredoka-VariableFont_wdth\,wght.ttf");
+}
+
+@font-face {
+  font-family: hubbali;
+  src: url("../fonts/Hubballi/Hubballi-Regular.ttf");
+}
+
+@font-face {
+  font-family: lato;
+  src: url("../fonts/Lato/Lato-Regular.ttf");
+}
+
+@font-face {
+  font-family: spartan;
+  src: url("../fonts/League_Spartan/LeagueSpartan-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: lora;
+  src: url("../fonts/Lora/Lora-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: monserrat;
+  src: url("../fonts/Montserrat/Montserrat-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: nunito;
+  src: url("../fonts/Nunito/Nunito-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: open-sans;
+  src: url("../fonts/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf");
+}
+
+@font-face {
+  font-family: oxygen;
+  src: url("../fonts/Oxygen/Oxygen-Regular.ttf");
+}
+
+@font-face {
+  font-family: poppins;
+  src: url("../fonts/Poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: quicksand;
+  src: url("../fonts/Quicksand/Quicksand-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: raleway;
+  src: url("../fonts/Raleway/Raleway-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: roboto;
+  src: url("../fonts/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+  font-family: rubik;
+  src: url("../fonts/Rubik/Rubik-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: sarabun;
+  src: url("../fonts/Sarabun/Sarabun-Regular.ttf");
+}
+
+@font-face {
+  font-family: source-sans;
+  src: url("../fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf");
+}
+
+@font-face {
+  font-family: MaterialIcons;
+  src: url("../fonts/Material Icons/MaterialIcons-Regular.ttf");
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  outline: none;
+  border: none;
+  transition: all 0.3s ease;
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+}
+
+@media screen and (max-width: 720px) {
+  * {
+    transition: none;
+  }
+}
