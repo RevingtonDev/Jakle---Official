@@ -61,9 +61,9 @@ public class JMail {
                 .setAccessType("offline")
                 .build();
         LocalServerReceiver receiver = new LocalServerReceiver.Builder()
-                .setPort(9000)
+                .setPort(9000) 
                 .build();
-
+        
         return new AuthorizationCodeInstalledApp(codeFlow, receiver).authorize("user");
     }
 

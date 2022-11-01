@@ -12,11 +12,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import jakarta.servlet.FilterChain;
+import java.net.InetAddress;
 import java.security.MessageDigest;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Date;
+import org.springframework.core.env.Environment;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -33,17 +35,21 @@ public class Application implements CommandLineRunner {
     private RequestRepository requestRepository;
     @Autowired
     private JMail mailService;
+    @Autowired
+    private Environment environment;
 
     @Override
     public void run(String... args) throws Exception {  
         userRepository.findAll().forEach((user) -> {
             user.setActivity(Parameter.OFFLINE);
-            user.setSocketId("");
-            user.setValidity(Parameter.ACTIVATED); 
+            user.setSocketId(""); 
             user.setActive("");
             userRepository.save(user);
         });
 
+         
+       
+        
         mailService.getCredentials(GoogleNetHttpTransport.newTrustedTransport());
     }
 
