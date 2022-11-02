@@ -109,6 +109,8 @@ class LayoutComponent extends Component {
                   padding: "20px 25px",
                   fontFamily: "lato",
                   backgroundClip: "text",
+                  MozBackgroundClip: "text",
+                  WebkitBackgroundClip: "text",
                   border: "3px solid silver",
                   fontSize: "1.3rem",
                   fontWeight: "700",

@@ -92,10 +92,12 @@ class NotificationsComponent extends Component {
           >
             {isWaiting ? (
               <>
-                <div className="component-waiting center space-bet align-start column-flex">
-                  <span className="loading-bar capsule"></span>
-                  <span className="loading-bar capsule"></span>
-                  <span className="loading-bar capsule"></span>
+                <div className="row center">
+                  <div className="component-waiting center space-bet align-start column-flex">
+                    <span className="loading-bar capsule"></span>
+                    <span className="loading-bar capsule"></span>
+                    <span className="loading-bar capsule"></span>
+                  </div>
                 </div>
               </>
             ) : (

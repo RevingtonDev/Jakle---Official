@@ -123,7 +123,7 @@ class DiscoverComponent extends Component {
                 className="data-field"
               />
               <button
-                className="btn"
+                className="btn svg"
                 disabled={isWaiting}
                 onClick={(e) => {
                   this.search();

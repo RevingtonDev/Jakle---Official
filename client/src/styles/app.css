@@ -711,19 +711,19 @@ span.online {
   fill: white;
 }
 
-.btn:has(> svg) {
+.btn.svg {
   padding: 4px 6px;
   border-radius: 50%;
   margin-left: 3px;
 }
 
-.btn:has(> svg):disabled {
+.btn.svg:disabled {
   background-color: var(--shiney-grey);
 }
-.btn:has(> svg):enabled {
+.btn.svg:enabled {
   background-color: var(--main-color);
 }
-.btn:has(> svg):enabled:hover {
+.btn.svg:enabled:hover {
   box-shadow: 0 0 15px var(--def-color);
 }
 
