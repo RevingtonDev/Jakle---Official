@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { get_notifications } from "../api/request";
@@ -80,6 +81,9 @@ class NotificationsComponent extends Component {
     const { data, pages, isWaiting, filter } = this.state;
     return (
       <>
+        <Helmet>
+          <title>Jakle - Notifications</title>
+        </Helmet>
         <section className="page-container layout-page center justify-start column-flex">
           <div className="layout-title">Notifications</div>
           <div

@@ -1,4 +1,5 @@
 import React, { Component, createRef } from "react";
+import { Helmet } from "react-helmet";
 import { get_info, reset_password, update_account } from "../api/request";
 import { PersonHeart } from "../components/Images";
 
@@ -99,6 +100,9 @@ export class Settings extends Component {
     }
     return (
       <>
+        <Helmet>
+          <title>Jakle - Settings</title>
+        </Helmet>
         <section className="page-container layout-page center justify-start column-flex">
           <div className="container page-container row">
             <div className="row center row-flex space-bet">
