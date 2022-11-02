@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html>
     <head>
         <title>Jakle - Reset Password</title>
@@ -12,8 +7,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </head>
     <body>
         <div class="page-container window-fill center align-start">
-            <div class="container page-container center" style="padding: 20px">
-                <h3 class="center row">Reset Password</h3>
+            <div class="container page-container center column-flex" style="padding: 20px">
+                <h3 class="center container-title row" style="font-weight: 200; margin-right: auto">Reset Password</h3>
                 <form class="center column-flex" method="post" enctype="application/x-www-form-urlencoded">
                     <div class="data-input">
                         <input class="data-field row" required type="password" id="password-field" placeholder="Password" name="password" autocomplete="off" spellcheck="false"/>
@@ -89,7 +84,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     </div>
                     <div class="error center capsule row" th:if="${error}" th:text="${des}">
                     </div>
-                    <div class="form-end center flex-end">
+                    <div class="center flex-end">
                       <button class="btn default-btn" style="align-self: center;">Reset Password</button>
                     </div> 
                 </form>

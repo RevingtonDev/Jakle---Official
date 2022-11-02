@@ -43,7 +43,7 @@ public class Credential {
     private String css;
 
     private Logger logger = Logger.getLogger(Credential.class.getName());
-
+    
     @GetMapping("/login")
     public String login(Model model, HttpServletRequest req) {
         model.addAttribute("link", "Login");
