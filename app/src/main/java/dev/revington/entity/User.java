@@ -1,12 +1,10 @@
 package dev.revington.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import dev.revington.util.DefaultValueFilter;
-import java.util.ArrayList;
+import dev.revington.util.DefaultValueFilter; 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.Date;
-import net.minidev.json.JSONObject;
+import java.util.Date; 
 
 @Document("users")
 @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = DefaultValueFilter.class)

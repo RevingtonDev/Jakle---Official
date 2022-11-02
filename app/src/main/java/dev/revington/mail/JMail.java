@@ -18,8 +18,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.Address;
 import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.AddressException;
+import javax.mail.Session; 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.*;
@@ -94,7 +93,7 @@ public class JMail {
         message.setLabelIds(labels);
         
         try {
-            Message output = service.users().messages().send("me", message).execute();
+            service.users().messages().send("me", message).execute();
             return true;
         } catch (GoogleJsonResponseException e) {
             Logger.getLogger(JMail.class.getName()).log(Level.SEVERE, null, e);

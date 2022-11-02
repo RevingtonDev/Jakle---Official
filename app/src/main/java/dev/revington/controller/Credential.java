@@ -1,6 +1,5 @@
 package dev.revington.controller;
-
-import com.google.common.hash.Hashing;
+ 
 import dev.revington.entity.Token;
 import dev.revington.entity.User;
 import dev.revington.mail.JMail;
@@ -12,30 +11,21 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
+import org.springframework.ui.Model; 
 import org.springframework.web.bind.annotation.*;
 
 import dev.revington.repository.UserRepository;
-import dev.revington.util.Security;
-import dev.revington.variables.StatusHandler;
+import dev.revington.util.Security; 
 import jakarta.servlet.http.HttpServletRequest;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Timestamp;
+ 
+import java.io.IOException; 
+import java.nio.charset.StandardCharsets; 
+import java.security.NoSuchAlgorithmException; 
 import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import java.util.logging.Logger; 
 
 @Controller
 public class Credential {

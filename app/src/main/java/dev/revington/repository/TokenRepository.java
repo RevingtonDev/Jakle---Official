@@ -3,9 +3,7 @@ package dev.revington.repository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import dev.revington.entity.Token;
-import org.springframework.data.mongodb.repository.Query;
-
-import java.util.Optional;
+import org.springframework.data.mongodb.repository.Query; 
 
 public interface TokenRepository extends MongoRepository<Token, String> {
 

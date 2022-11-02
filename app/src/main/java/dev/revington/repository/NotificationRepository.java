@@ -9,11 +9,7 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.Aggregation;
-
-/**
- *
- * @author micha
- */ 
+ 
 public interface NotificationRepository extends MongoRepository<Notification, String> {
 
     @Query("{ owner: ?0 }")

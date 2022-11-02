@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dev.revington.api;
 
 import dev.revington.variables.StatusHandler;
@@ -9,13 +5,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.http.HttpClient;
+import java.net.URL; 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.minidev.json.JSONObject;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping; 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GMailAuthProvider {
     
-    private Logger logger = Logger.getLogger(GMailAuthProvider.class.getName());
+    private final Logger logger = Logger.getLogger(GMailAuthProvider.class.getName());
     
     @GetMapping("/auth")
     public JSONObject reroute(HttpServletRequest req, @RequestParam String code, @RequestParam String scope) {

@@ -1,7 +1,5 @@
 package dev.revington.variables;
-
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.gson.GsonFactory;
+ 
 import net.minidev.json.JSONObject;
 
 public class Parameter {
@@ -105,4 +103,5 @@ public class Parameter {
     public static String CLIENT_ONLINE = "make_online";
     public static String CLIENT_OFFLINE = "make_offline";
     public static String CLIENT_TYPING = "make_typing";
+    
 }

@@ -1,11 +1,9 @@
 package dev.revington.util;
-
-import dev.revington.controller.Credential;
+ 
 import dev.revington.entity.Token;
 import dev.revington.entity.User;
 import dev.revington.mail.JMail;
-import dev.revington.variables.Parameter;
-import org.springframework.beans.factory.annotation.Autowired;
+import dev.revington.variables.Parameter; 
 import org.springframework.util.DigestUtils;
 
 import java.io.FileNotFoundException;

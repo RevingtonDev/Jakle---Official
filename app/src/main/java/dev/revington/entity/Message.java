@@ -3,11 +3,7 @@ package dev.revington.entity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import dev.revington.util.DefaultValueFilter;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-/**
- *
- * @author micha
- */
+ 
 @Document("messages")
 @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = DefaultValueFilter.class)
 public class Message {

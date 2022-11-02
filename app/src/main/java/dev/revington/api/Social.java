@@ -1,6 +1,5 @@
 package dev.revington.api;
 
-import com.google.common.collect.HashBiMap;
 import dev.revington.entity.Friend;
 import dev.revington.entity.Notification;
 import dev.revington.entity.Request;
@@ -15,9 +14,7 @@ import dev.revington.variables.Parameter;
 import dev.revington.variables.StatusHandler;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +23,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.messaging.support.GenericMessage;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,10 +40,7 @@ public class Social {
 
     @Autowired
     private NotificationRepository notificationRepository;
-
-    @Autowired
-    private TokenRepository tokenRepository;
-
+ 
     @Autowired
     private FriendRepository friendRepository;
 
@@ -92,11 +83,11 @@ public class Social {
             notificationRepository.save(notification);
 
             Optional<User> optional = userRepository.findById(id);
-            User user = null; 
+            User user = null;
             if (optional.isPresent() && (user = optional.get()).getActivity() == Parameter.ONLINE) {
                 messageTemplate.convertAndSendToUser(user.getSocketId(), Parameter.WS_QUEUE, new JSONObject().appendField(Parameter.WS_ACTION, Parameter.WS_ACTION_NOTIFY).appendField(Parameter.DATA, true));
                 messageTemplate.convertAndSendToUser(user.getSocketId(), Parameter.WS_QUEUE, new JSONObject().appendField(Parameter.WS_ACTION, Parameter.WS_ACTION_ADD_USER).appendField(Parameter.WS_DATA, userId));
-            } 
+            }
             result.put(Parameter.RESULTS, userRepository.findInfo(id).get());
         }
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);

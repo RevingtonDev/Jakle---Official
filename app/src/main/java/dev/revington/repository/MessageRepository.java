@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dev.revington.repository;
 
 import dev.revington.entity.Message;
@@ -10,10 +6,6 @@ import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository; 
 import org.springframework.data.mongodb.repository.Query;
 
-/**
- *
- * @author micha
- */
 public interface MessageRepository extends MongoRepository<Message, String> {
     
     @Aggregation(pipeline = {

@@ -1,8 +1,7 @@
 package dev.revington.util;
 
 import dev.revington.entity.Token;
-import dev.revington.entity.User;
-import dev.revington.variables.Parameter;
+import dev.revington.entity.User; 
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
