@@ -28,6 +28,18 @@ export class Home extends Component {
               Sign up
             </a>
           </div>
+          <div
+            style={{
+              position: "absolute",
+              bottom: "0",
+              right: "0",
+              zIndex: "5000",
+              fontFamily: "source-sans",
+              fontSize: "0.7rem",
+            }}
+          >
+            v1.0.1
+          </div>
         </main>
       </>
     );
