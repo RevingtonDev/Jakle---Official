@@ -118,12 +118,15 @@
                     <input class="check-box" type="checkbox" id="lc-s" required="true">
                         <label for="lc-s" class="center row-flex check-label">
                             <span class="check-field center"></span>
-                            I agree to all license and terms.
+                            I agree to all license and agreements.
                         </label>
                 </div> 
-                <div class="error center capsule row" th:if="${error}" th:text="${des}">
+                <div class="row center">
+                    <div class="error center capsule row" th:if="${error}" th:text="${des}">
                 </div>
-                <div class="form-end center flex-end">
+                </div>
+                <div class="form-end center space-bet">
+                    <a class="link" href="/login" style="font-size: 0.9rem">Already have an account?</a>
                     <button class="btn default-btn" style="align-self: center;">Sign Up</button>
                 </div>
             </form>
