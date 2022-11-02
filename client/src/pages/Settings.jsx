@@ -113,10 +113,19 @@ export class Settings extends Component {
                 onClick={() => {
                   this.setEditable(true);
                 }}
-                className="btn action-btn"
+                className="btn action-btn center"
                 style={{ backgroundColor: "var(--fd-f)" }}
-                disabled={isWaiting}
+                disabled={isWaiting || editable}
               >
+                <span
+                  style={{
+                    fontFamily: "MaterialIcons",
+                    fontSize: "1.1rem",
+                    marginRight: "5px",
+                  }}
+                >
+                  edit
+                </span>
                 Edit
               </button>
             </div>

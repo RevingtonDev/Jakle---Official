@@ -1049,11 +1049,17 @@ span svg {
 
 .action-btn {
   color: white;
+  font-family: "rubik";
   margin: 5px;
+  border-radius: 2px;
+}
+
+.action-btn:disabled {
+  opacity: 0;
 }
 
 .action-btn:hover {
-  box-shadow: 0 0 3px currentColor;
+  box-shadow: 0 0 3px grey;
 }
 .info {
   padding: 5px 8px;
@@ -1065,6 +1071,7 @@ span svg {
   color: var(--g);
 }
 .info.des-err {
+  min-width: fit-content;
   border: 2px solid var(--red);
   color: var(--red);
 }
