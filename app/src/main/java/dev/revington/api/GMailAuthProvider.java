@@ -12,11 +12,6 @@ import net.minidev.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping; 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-/**
- *
- * @author michael
- */
 @RestController
 public class GMailAuthProvider {
     
