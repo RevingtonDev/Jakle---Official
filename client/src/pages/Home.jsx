@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import Logo from "../images/logo.png";
 
+import project from "../../package.json"
+
 export class Home extends Component {
   render() {
     return (
@@ -38,7 +40,7 @@ export class Home extends Component {
               fontSize: "0.7rem",
             }}
           >
-            v1.0.1
+              {project.version}
           </div>
         </main>
       </>

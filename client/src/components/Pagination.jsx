@@ -52,6 +52,7 @@ export class Pagination extends Component {
               return (
                 <button
                   className="btn pag-btn"
+                    // eslint-disable-next-line
                   disabled={elm == current}
                   onClick={(e) => {
                     callback(elm);
