@@ -43,7 +43,7 @@ public class WebConfig {
     public FilterRegistrationBean<GuestFilter> guestFilter() {
         FilterRegistrationBean<GuestFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new GuestFilter());
-        registrationBean.addUrlPatterns("/", "/auth", "/login", "/activate", "/signup", "/api/v1/activate");
+        registrationBean.addUrlPatterns("/", "/auth", "/login", "/activate", "/reactivate", "/signup", "/api/v1/activate");
         return registrationBean;
     }
 
