@@ -30,10 +30,9 @@
 </h3>
 </p>
 
-<form action="%s" method="post" class="flex row" enctype="application/x-www-form-urlencoded">
-    <input style="display: none;" name="token" type="text" value="%s">
-    <input style="margin: auto;" class="btn" type="submit" value="Verify">
-</form>
+<div class="flex row">
+    <a style="margin: auto;" href="%s/?token=%s" class="btn">Verify</a>
+</div>
 </div>
 </body>
 </html>
