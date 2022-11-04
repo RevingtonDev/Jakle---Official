@@ -34,6 +34,7 @@ app/src/main/resources/templates/index.html
 
 app/build.properties
 app/token
+token
 app/src/main/resources/chunk.props
 app/src/main/resources/application.properties
 app/src/main/resources/mail/secrets
