@@ -472,7 +472,7 @@ input ~ label {
   z-index: 1500;
 }
 
-.profile-logo img {
+.profile-logo img, .row-logo img {
   height: 100%;
 }
 
