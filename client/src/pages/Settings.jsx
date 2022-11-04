@@ -2,6 +2,7 @@ import React, { Component, createRef } from "react";
 import { Helmet } from "react-helmet";
 import { get_info, reset_password, update_account } from "../api/request";
 import { PersonHeart } from "../components/Images";
+import { ProfilePictureUpdater } from "../components/ProfilePictureUpdater";
 
 export class Settings extends Component {
   constructor(props) {
@@ -12,9 +13,13 @@ export class Settings extends Component {
       editable: false,
       isWaiting: false,
       reset_output: undefined,
+      update_picture: false,
     };
 
     this.form = createRef();
+
+    this.updatePicture = this.updatePicture.bind(this);
+    this.setUser = this.setUser.bind(this);
   }
 
   setEditable(state) {
@@ -36,7 +41,7 @@ export class Settings extends Component {
     }
     const req = await update_account(JSON.stringify(body));
     if (req && req.code === 200) {
-      this.setState({ user: body });
+      this.setUser(req.results)
     } else {
       for (let i = 0; i < elms.length; i++) {
         elms[i].value = elms[i].defaultValue;
@@ -49,7 +54,7 @@ export class Settings extends Component {
     this.setState({ isWaiting: true });
     const req = await get_info("");
     if (req && req.code === 200) {
-      this.setState({ user: req.results });
+      this.setUser(req.results);
     }
     this.setState({ isWaiting: false });
   }
@@ -79,8 +84,15 @@ export class Settings extends Component {
         },
       });
     }
-    console.log(this.state);
     this.setState({ isWaiting: false });
+  }
+
+  updatePicture(state) {
+    this.setState({ update_picture: state });
+  }
+
+  setUser(user) {
+    this.setState({user: user});
   }
 
   componentDidMount() {
@@ -88,7 +100,8 @@ export class Settings extends Component {
   }
 
   render() {
-    const { user, editable, isWaiting, reset_output } = this.state;
+    const { user, editable, isWaiting, reset_output, update_picture } =
+      this.state;
     let date = undefined;
     if (user.dateOfBirth) {
       let _date = new Date(user.dateOfBirth),
@@ -103,7 +116,7 @@ export class Settings extends Component {
         <Helmet>
           <title>Jakle - Settings</title>
         </Helmet>
-        <section className="page-container layout-page center justify-start column-flex">
+        <section className="page-container layout-page center justify-start column-flex rel">
           <div className="container page-container row">
             <div className="row center row-flex space-bet">
               <div className="container-title">
@@ -118,8 +131,8 @@ export class Settings extends Component {
                 disabled={isWaiting || editable}
               >
                 <span
+                  className="icon"
                   style={{
-                    fontFamily: "MaterialIcons",
                     fontSize: "1.1rem",
                     marginRight: "5px",
                   }}
@@ -139,12 +152,27 @@ export class Settings extends Component {
               <div
                 className="profile-logo center editable row rel"
                 style={{ padding: user.profilePic ? "0" : "30px" }}
+                onClick={() => {
+                  this.updatePicture(true);
+                }}
               >
                 {user && user.profilePic ? (
                   <img src={user.profilePic} alt="profile-pic" />
                 ) : (
                   PersonHeart
                 )}
+                <span
+                  className="icon cam-icon"
+                  style={{
+                    position: "absolute",
+                    zIndex: "1000",
+                    fontSize: "4rem",
+                    color: "white",
+                    textShadow: "0 0 5px var(--main-color)",
+                  }}
+                >
+                  photo_camera
+                </span>
               </div>
               <div className="user-info row">
                 <div className="data-input data-show center column-flex align-start">
@@ -230,6 +258,14 @@ export class Settings extends Component {
               </div>
             </div>
           </div>
+          {update_picture && (
+            <div
+              className="page-container layout-page center parent-fill"
+              style={{ position: "absolute", top: 0, left: 0, zIndex: "1500" }}
+            >
+              {<ProfilePictureUpdater visibility={this.updatePicture} user={user} setUser={this.setUser}/>}
+            </div>
+          )}
         </section>
       </>
     );

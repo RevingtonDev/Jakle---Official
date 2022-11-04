@@ -465,6 +465,15 @@ input ~ label {
   position: relative;
   font-size: 2rem !important;
   border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1500;
+}
+
+.profile-logo img {
+  height: 100%;
 }
 
 .profile-logo {
@@ -1106,6 +1115,32 @@ span svg {
   margin: 0 15px;
 }
 
+.cam-icon {
+  opacity: 0;
+}
+
+.profile-logo:hover .cam-icon {
+  opacity: 1;
+}
+
+.close-btn {
+  background-color: white;
+  font-size: 1.3rem;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+}
+
+.close-btn:hover {
+  box-shadow: 0 0 8px white;
+}
+
+input[type="file"]:invalid {
+  color: var(--red);
+}
+
 @media screen and (max-width: 700px) {
   html,
   body {
@@ -1229,6 +1264,14 @@ span svg {
 
   .back-btn {
     display: block;
+  }
+
+  .profile-logo.editable::after {
+    display: none;
+  }
+
+  .cam-icon {
+    opacity: 1;
   }
 }
 

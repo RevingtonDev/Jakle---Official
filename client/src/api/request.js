@@ -5,25 +5,42 @@ const add_params = (url, params) => {
   return url + "?" + new URLSearchParams(params).toString();
 };
 
-const headers = (method, body) => {
+const headers = (method, body, content) => {
   let header_content = {
     method: method,
     credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
   };
 
   if (body) header_content["body"] = body;
+  if (content) header_content["headers"] = {
+    "Content-Type": content
+  }
 
   return header_content;
 };
 
-export const request = (url, method, params, body) => {
+export const request = (url, method, params, body, content) => {
   url = add_params(url, params);
 
-  return fetch(url, headers(method, body));
+  return fetch(url, headers(method, body, content === null ? undefined : "application/json"));
 };
+
+
+const xhr_request = async (method, url, params, headers, body, onload, onprogress) => {
+  url = add_params(url, params);
+
+  let xhr = new XMLHttpRequest();
+  if (headers) {
+    for (let header in headers) {
+      xhr.setRequestHeader(header.name, header.value);
+    }
+  }
+  xhr.open(method, url, true);
+  xhr.onprogress = onprogress;
+  xhr.onload = onload;
+  xhr.send(body);
+  return await xhr.response;
+}
 
 const handle_response = async (res) => {
   if (res && res.ok) return res.json();
@@ -104,6 +121,11 @@ const activate = async (email) => {
   await handle_response(request(API_ROUTES.ACTIVATE, "put", { email: email }));
 };
 
+
+const upload_file = async (body, onload, onprogress) => {
+  return await xhr_request("post", API_ROUTES.UPLOAD,undefined, undefined, body, onload, onprogress);
+}
+
 export {
   get_friends,
   delete_messages,
@@ -118,4 +140,5 @@ export {
   update_account,
   reset_password,
   activate,
+    upload_file,
 };

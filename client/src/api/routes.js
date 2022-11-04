@@ -7,6 +7,7 @@ export const API_ROUTES = {
   UPDATE: API + "update",
   RESET: API + "reset-link",
   ACTIVATE: API + "activate",
+  UPLOAD: API + "upload",
   FRIENDS: SOCIAL + "friends",
   FRIEND: SOCIAL + "friend",
   SEARCH: SOCIAL + "search",

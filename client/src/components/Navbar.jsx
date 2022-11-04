@@ -44,7 +44,6 @@ class NavbarComponent extends Component {
   render() {
     const { hasNewNotifications, params } = this.props;
     const { isPanelShowing } = this.state;
-    console.log(params);
     return (
       <>
         <button

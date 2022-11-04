@@ -11,7 +11,6 @@ const defState = {
 };
 
 const reducer = (state = defState, { type, payload }) => {
-  console.log(type, payload);
   switch (type) {
     case "update_users":
       return {

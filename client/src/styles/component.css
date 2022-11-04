@@ -129,3 +129,7 @@ h4 {
 .icon {
   font-family: MaterialIcons;
 }
+
+.point-c {
+  cursor: pointer;
+}
