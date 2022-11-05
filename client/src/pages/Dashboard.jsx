@@ -52,10 +52,6 @@ class DashboardComponent extends Component {
     this.setState({ isWaiting: false });
   }
 
-  componentDidUpdate() {
-    console.log(this.props.storeData.data);
-  }
-
   setFilter() {
     this.setState({ filter: this.filter.current.value });
   }

@@ -52,6 +52,12 @@ class LayoutComponent extends Component {
       )
         this.props.navigate("/op/dashboard");
     };
+    this.socket.onWebSocketError = (evt) => {
+      this.props.dispatch(execute({ type: "set_connection", payload: false }));
+    }
+    this.socket.onWebSocketClose = (evt) => {
+      this.props.dispatch(execute({ type: "set_connection", payload: false }));
+    }
     this.socket.connect({}, () => {
       this.socket.subscribe(ENDPOINTS.SUBSCRIBE);
       this.props.dispatch(execute({ type: "set_connection", payload: true }));

@@ -140,7 +140,7 @@
                         <div class="container-title">
                             Reset Password
                         </div>
-                        <button type="button" onclick="changeResetWindow(false)" class="btn" style="font-family: MaterialIcons; background-color: white; font-size: 1.3rem; padding: 5px; border-radius: 50%">close</button>
+                        <button type="button" onclick="changeResetWindow(false)" class="close-btn icon">close</button>
                     </div>
                     <div class="row data-input">
                         <input type="email" name="email" spellcheck="off" class="data-field" placeholder="Email" required>
@@ -148,7 +148,7 @@
                     <span class="row center capsule"></span>
                     <div class="space-bet center row form-end">
                         <div></div>
-                        <button class="default-btn btn capsule">Reset</button>
+                        <button name="reset_btn" class="default-btn btn capsule">Reset</button>
                     </div>
                 </form>
             </section>
@@ -165,13 +165,17 @@
 
             let show_password = false, show_reset_window = false, reset_output = undefined;
 
-            const changeResetWindow = () => {
+            function change() {
                 if (show_reset_window) {
                     resetFormContainer.classList.add("remove");
                 } else {
                     resetFormContainer.classList.remove("remove");
                 }
                 show_reset_window = !show_reset_window;
+            }
+
+            const changeResetWindow = () => {
+                change();
             };
 
             pState.addEventListener("click", () => {
@@ -198,6 +202,7 @@
                 resetError.innerHTML = "";
                 resetError.classList.remove("error");
                 reset_output = undefined;
+                resetForm["reset_btn"].disabled = true;
 
                 fetch(`/api/v1/reset-link?email=${resetForm[1].value}`, {method: "post", credentials: "include"})
                         .catch(e => {
@@ -207,9 +212,9 @@
                         .then(res => {
                             if (res) {
                                 if (res.code === 200) {
-                                    let parser = new DomParser();
-                                    document.appendChild(parser.parseFromString(`<div class="page-notification row center" style="padding: 8px">A password reset link successfully send.</div>`))
-                                    changeResetWindow(false);
+                                    let parser = new DOMParser(), elm = parser.parseFromString(`<html><body><div class="page-notification row center" style="padding: 8px">A password reset link successfully send.</div></body></html>`, "text/html");
+                                    document.querySelector("body").append(elm.body.firstChild);
+                                    change();
                                 } else {
                                     reset_output = res.query;
                                 }
@@ -220,6 +225,7 @@
                                 resetError.innerHTML = reset_output;
                                 resetError.classList.add("error");
                             }
+                            resetForm["reset_btn"].disabled = false;
                         });
             });
         </script>
