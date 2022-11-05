@@ -191,7 +191,7 @@ public class Credential {
         resp.sendRedirect("/login");
     }
 
-    @PostMapping("/activate")
+    @GetMapping("/activate-link")
     public void sendActivation(HttpServletRequest req, HttpServletResponse resp, @RequestParam(required = false, defaultValue = "") String email) throws IOException {
         Token token = null;
         User user = null;
