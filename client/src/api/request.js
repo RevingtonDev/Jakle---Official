@@ -118,7 +118,7 @@ const reset_password = async () => {
 };
 
 const activate = async (email) => {
-  await handle_response(request(API_ROUTES.ACTIVATE, "put", { email: email }));
+  await handle_response(request(API_ROUTES.ACTIVATE, "post", { email: email }));
 };
 
 

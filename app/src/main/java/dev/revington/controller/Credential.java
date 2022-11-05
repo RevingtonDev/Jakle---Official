@@ -169,7 +169,7 @@ public class Credential {
         return "signup";
     }
 
-    @PostMapping("/activate")
+    @GetMapping("/activate")
     public void activate(HttpServletRequest req, HttpServletResponse resp, @RequestParam String token) throws IOException {
         token = new String(Base64.getDecoder().decode(token.getBytes()));
         Token tokenObj;
@@ -191,7 +191,7 @@ public class Credential {
         resp.sendRedirect("/login");
     }
 
-    @GetMapping("/activate")
+    @PostMapping("/activate")
     public void sendActivation(HttpServletRequest req, HttpServletResponse resp, @RequestParam(required = false, defaultValue = "") String email) throws IOException {
         Token token = null;
         User user = null;
@@ -265,7 +265,7 @@ public class Credential {
         resp.sendRedirect("./login");
     }
 
-    @PostMapping("/reactivate")
+    @GetMapping("/reactivate")
     public void reactivateAccount(HttpServletRequest req, HttpServletResponse resp, @RequestParam String token) throws IOException {
         token = new String(Base64.getDecoder().decode(token.getBytes()));
         Token tokenObj = tokenRepository.findByToken(token);

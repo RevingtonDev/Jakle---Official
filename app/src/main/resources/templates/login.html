@@ -113,9 +113,9 @@
                 <div class="error center capsule" th:if="${error}" th:text="${des}">
 
                 </div>
-                <div class="row center" th:if="${activate}">
-                    <a href="/activate" class="btn default-btn">Resend Link</a>
-                </div>
+                <form method="post" action="/activate" class="row center" th:if="${activate}">
+                    <button type="submit" class="btn default-btn">Resend Link</button>
+                </form>
                 <div class="row data-check center row-flex">
                     <input class="check-box" type="checkbox" name="remember" id="remember_me">
                         <label for="remember_me" class="center row-flex check-label">
