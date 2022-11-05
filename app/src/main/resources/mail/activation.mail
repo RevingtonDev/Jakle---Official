@@ -31,7 +31,7 @@
 </p>
 
 <div class="flex row">
-    <a style="margin: auto;" href="%s/?token=%s" class="btn">Verify</a>
+    <a style="margin: auto; text-decoration: none;" href="%s?token=%s" class="btn">Verify</a>
 </div>
 </div>
 </body>
