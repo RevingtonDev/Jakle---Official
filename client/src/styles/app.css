@@ -465,7 +465,6 @@ input ~ label {
   position: relative;
   font-size: 2rem !important;
   border-radius: 50%;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -474,6 +473,8 @@ input ~ label {
 
 .profile-logo img, .row-logo img {
   height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
 }
 
 .profile-logo {
