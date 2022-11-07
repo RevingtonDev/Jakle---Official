@@ -24,7 +24,7 @@ public interface NotificationRepository extends MongoRepository<Notification, St
     Slice<Notification> findAllByOwner(String owner, Pageable pageable);
     
     @Aggregation(pipeline = {
-            "{$match: {$expr: {$and: [{$eq: [\"$owner\", ?0], {$eq: [\"$category\", ?1]}}]}}}",
+            "{$match: {$expr: {$and: [{$eq: [\"$owner\", ?0]}, {$eq: [\"$category\", ?1]}]}}}",
             "{$lookup: {from: \"users\", let: {\"id\": {$toString: \"$notification.second\"}}, pipeline: [{$match: {$expr: {$eq: [$$id, {$toString: \"$_id\"}]}}}, {$unset: [\"email\",\"password\",\"socketId\",\"validity\",\"status\",\"attempts\", \"activity\", \"count\", \"time\", \"active\", \"id\"]}], as: \"values\"}}",
             "{$set:  {\"detail\": {$first: \"$values\"}}}",
             "{$unset: [\"owner\"]}"

@@ -18,6 +18,7 @@ export const Notifications = (props) => {
       dispatch={useDispatch()}
       navigate={useNavigate()}
       page={parseInt(params.get("page"))}
+      filter={parseInt(params.get("filter"))}
     />
   );
 };
@@ -30,7 +31,7 @@ class NotificationsComponent extends Component {
       isWaiting: true,
       data: [],
       pages: 0,
-      filter: 1,
+      filter: this.props.filter || 1,
     };
 
     this.page = this.props.page;
@@ -40,23 +41,23 @@ class NotificationsComponent extends Component {
 
   componentDidMount() {
     this.props.dispatch(execute({ type: "notify", payload: false }));
-    this.retrieveData();
+    this.retrieveData(this.state.filter);
   }
 
   componentDidUpdate() {
     if (this.props.page && this.props.page !== this.page) {
       this.page = this.props.page;
-      this.retrieveData();
+      this.retrieveData(this.state.filter);
     }
   }
 
-  async retrieveData() {
+  async retrieveData(filter) {
     this.setState({ isWaiting: true });
     const req = await get_notifications(
-      undefined,
+      "true",
       this.page,
       15,
-      this.state.filter
+      filter
     );
     if (req) {
       this.setState({ data: req.results, pages: req.total_pages });
@@ -74,7 +75,7 @@ class NotificationsComponent extends Component {
 
   changeFilter(filter) {
     this.setState({ filter: filter });
-    this.retrieveData();
+    this.retrieveData(filter);
   }
 
   render() {
@@ -104,7 +105,7 @@ class NotificationsComponent extends Component {
               <>
                 <div className="row center row-flex">
                   <label htmlFor="filter" style={{ fontFamily: "lato" }}>
-                    FIlter:
+                    Filter:
                   </label>
                   <select
                     disabled={isWaiting}
