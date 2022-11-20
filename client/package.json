@@ -1,6 +1,6 @@
 {
   "name": "jakle",
-  "version": "v1.3.5",
+  "version": "v1.4.5",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",

@@ -179,6 +179,7 @@ public class Credential {
                 req.getSession().setAttribute(Parameter.ACTION, Parameter.EXPIRED_TOKEN);
             } else {
                 User user = userRepository.findById(tokenObj.getClientId()).get();
+                user.setValidity(Parameter.ACTIVATED);
                 user.setStatus(Parameter.ACTIVE);
                 userRepository.save(user);
 
@@ -274,8 +275,7 @@ public class Credential {
             if (new Date().getTime() > tokenObj.getExpires()) {
                 req.getSession().setAttribute(Parameter.ACTION, Parameter.EXPIRED_TOKEN);
             } else {
-                User user = userRepository.findById(tokenObj.getClientId()).get();
-                user.setValidity(Parameter.ACTIVATED);
+                User user = userRepository.findById(tokenObj.getClientId()).get(); 
                 user.setStatus(Parameter.ACTIVE);
                 userRepository.save(user);
 

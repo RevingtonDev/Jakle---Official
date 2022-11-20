@@ -21,7 +21,8 @@ public class GMailAuthProvider {
     public JSONObject reroute(HttpServletRequest req, @RequestParam String code, @RequestParam String scope) {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(String.format("http://localhost:9000/Callback?code=%s&scode=%s", code, scope)).openConnection();
-            logger.log(Level.WARNING, new String(connection.getInputStream().readAllBytes()));
+            // logger.log(Level.WARNING, new String(connection.getInputStream().readAllBytes()));
+	    logger.log(Level.INFO, "Gmail authorized.");
         } catch (MalformedURLException ex) {
             logger.log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
