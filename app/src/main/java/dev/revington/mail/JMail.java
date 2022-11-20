@@ -8,6 +8,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
@@ -68,8 +69,10 @@ public class JMail {
 
     public boolean sendMail(String to, String subject, String content)
             throws GeneralSecurityException, IOException, MessagingException {
-        final NetHttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
-        Gmail service = new Gmail.Builder(transport, JSON_FACTORY, getCredentials(transport))
+        GoogleCredentials credentials = GoogleCredentials.getApplicationDefault()
+        .createScoped(GmailScopes.GMAIL_COMPOSE);
+        HttpRequestInitializer requestInitializer = new HttpCredentialsAdapter(credentials);
+        Gmail service = new Gmail.Builder(transport, JSON_FACTORY, requestInitializer)
                 .setApplicationName(APPLICATION)
                 .build();
         Properties props = new Properties();
