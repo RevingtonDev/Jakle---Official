@@ -8,6 +8,8 @@ app/bin
 app/src/main/resources/static
 # app/build.properties
 
+app/src/test
+
 # Ignore IDE directories
 .idea
 .vscode

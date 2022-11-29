@@ -15,6 +15,8 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Message;
+import com.google.auth.http.HttpCredentialsAdapter;
+import com.google.auth.oauth2.GoogleCredentials;
 import org.springframework.stereotype.Component;
 
 import javax.mail.Address;
@@ -31,18 +33,21 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.beans.factory.annotation.Value;
 
 @Component
 public class JMail {
 
-    private final String APPLICATION = "jakle";
+    @Value("${spring.mail.application}")
+    private  String APPLICATION;
+    @Value("${spring.mail.email}")
+    private String APPLICATION_EMAIL;
     private final String APPLICATION_NAME = "Jakle @Official";
-    private final String APPLICATION_EMAIL = "noreply.jakle.official@gmail.com";
     private final String SUPPORT_EMAIL = "michael.revington@gmail.com";
     private final String TOKEN_DIRECTORY = "token";
     private final String CREDENTIALS_FILE = "/mail/secrets/client_secrets.json";
 
-    private final Logger logger = Logger.getLogger(JMail.class.getName());
+    private static final Logger logger = Logger.getLogger(JMail.class.getName());
 
     private final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
@@ -56,7 +61,8 @@ public class JMail {
         }
 
         GoogleClientSecrets secrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(is));
-        GoogleAuthorizationCodeFlow codeFlow = new GoogleAuthorizationCodeFlow.Builder(transport, JSON_FACTORY, secrets, SCOPES)
+        GoogleAuthorizationCodeFlow codeFlow = new GoogleAuthorizationCodeFlow
+                .Builder(transport, JSON_FACTORY, secrets, SCOPES)
                 .setDataStoreFactory(new FileDataStoreFactory(new File(TOKEN_DIRECTORY)))
                 .setAccessType("offline")
                 .build();
@@ -65,15 +71,16 @@ public class JMail {
                 .build();
         
         return new AuthorizationCodeInstalledApp(codeFlow, receiver).authorize("user");
-    }
+    } 
 
     public boolean sendMail(String to, String subject, String content)
-            throws GeneralSecurityException, IOException, MessagingException {
-        GoogleCredentials credentials = GoogleCredentials.getApplicationDefault()
-        .createScoped(GmailScopes.GMAIL_COMPOSE);
-        HttpRequestInitializer requestInitializer = new HttpCredentialsAdapter(credentials);
-        Gmail service = new Gmail.Builder(transport, JSON_FACTORY, requestInitializer)
-                .setApplicationName(APPLICATION)
+            throws GeneralSecurityException, IOException, MessagingException { 
+        final NetHttpTransport transport = GoogleNetHttpTransport.newTrustedTransport(); 
+        Credential credentials = getCredentials(transport); 
+        if (credentials != null && credentials.getExpiresInSeconds() <= 0L)
+            credentials.refreshToken();
+    	Gmail service = new Gmail.Builder(transport, JSON_FACTORY, credentials)
+                .setApplicationName(APPLICATION) 
                 .build();
         Properties props = new Properties();
         Session session = Session.getDefaultInstance(props, null);
